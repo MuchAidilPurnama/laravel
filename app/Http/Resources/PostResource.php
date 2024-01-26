@@ -19,6 +19,7 @@ class PostResource extends JsonResource
      * @param  mixed $resource
      * @return void
      */
+    
     public function __construct($status, $message, $resource)
     {
         parent::__construct($resource);
