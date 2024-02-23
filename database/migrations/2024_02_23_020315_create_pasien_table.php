@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('goals', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('user_id');
+        Schema::create('pasien', function (Blueprint $table) {
+            $table->id();
             $table->string('nama');
-            $table->text('deskripsi');
-            $table->timestamps('tanggal_capai');
+            $table->string('jenis_kelamin');
+            $table->text('alamat');
+            $table->date('tgl_lahir');
+            $table->string('no_telp');
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('goals');
+        Schema::dropIfExists('pasien');
     }
 };

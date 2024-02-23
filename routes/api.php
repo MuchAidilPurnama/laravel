@@ -2,6 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\GoalController;
+use App\Http\Controllers\PasienController;
 
 /**
  * route "/register"
@@ -32,5 +36,27 @@ Route::post('/logout', App\Http\Controllers\Api\LogoutController::class)->name('
 //posts
 Route::apiResource('/posts', App\Http\Controllers\Api\PostController::class);
 
-//goals
-Route::apiResource('/goals', App\Http\Controllers\Api\GoalsController::class);
+//kategori
+Route::get('/kategoris', [KategoriController::class, 'index']);
+Route::get('/kategoris/{id}', [KategoriController::class, 'show']);
+Route::post('/kategoris', [KategoriController::class, 'store']);
+Route::put('/kategoris/{id}', [KategoriController::class, 'update']);
+Route::delete('/kategoris/{id}', [KategoriController::class, 'destroy']);
+
+Route::apiResource('tasks', TaskController::class);
+Route::middleware('custom')->get('/dashboard', function () {
+    return view('dashboard');
+});
+
+
+
+Route::resource('goals', GoalController::class);
+Route::put('goals/{goal}/complete', [GoalController::class, 'markAsCompleted']);
+Route::get('goals/search', [GoalController::class, 'search']);
+
+Route::get('/pasien', [PasienController::class, 'index']);
+Route::get('/pasien/{id}', [PasienController::class, 'show']);
+Route::post('/pasien', [PasienController::class, 'store']);
+Route::put('/pasien/{id}', [PasienController::class, 'update']);
+Route::delete('/pasien/{id}', [PasienController::class, 'destroy']);
+
