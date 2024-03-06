@@ -37,7 +37,7 @@ class PasienController extends Controller
     public function show($id)
     {
 
-        $pasiens = Pasien::with('Kandidat')->find($id);
+        $pasiens = Pasien::with('Pasien')->find($id);
 
         return view('pasien.pasien-show',compact('pasiens'));
     }
